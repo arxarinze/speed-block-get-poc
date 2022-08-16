@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1660652786775" clover="3.2.0">
-  <project timestamp="1660652786776" name="All files">
+<coverage generated="1660653079020" clover="3.2.0">
+  <project timestamp="1660653079020" name="All files">
     <metrics statements="74" coveredstatements="69" conditionals="5" coveredconditionals="5" methods="14" coveredmethods="13" elements="93" coveredelements="87" complexity="0" loc="74" ncloc="74" packages="4" files="4" classes="4"/>
     <package name="valr-fee">
       <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -55,7 +55,7 @@
         <line num="14" count="2" type="stmt"/>
         <line num="15" count="4" type="stmt"/>
         <line num="16" count="4" type="stmt"/>
-        <line num="18" count="1821" type="stmt"/>
+        <line num="18" count="13440" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
         <line num="27" count="2" type="stmt"/>
         <line num="28" count="4" type="stmt"/>
@@ -64,8 +64,8 @@
         <line num="31" count="4" type="stmt"/>
         <line num="32" count="39" type="stmt"/>
         <line num="34" count="4" type="stmt"/>
-        <line num="36" count="1821" type="stmt"/>
-        <line num="37" count="1821" type="stmt"/>
+        <line num="36" count="13440" type="stmt"/>
+        <line num="37" count="13440" type="stmt"/>
         <line num="40" count="4" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
         <line num="45" count="2" type="stmt"/>
