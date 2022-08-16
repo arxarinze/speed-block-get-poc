@@ -9,7 +9,11 @@
 ## Getting Started
 
 ```
+cp env.example .env
+add your Node to .env file
 yarn install
 yarn run dev for development use
 yarn run build for production use
 ```
+
+***run api as stated above***
