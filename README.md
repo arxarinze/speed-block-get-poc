@@ -10,7 +10,7 @@
 
 ```
 cp env.example .env
-add your Node to .env file
+add your web3 Node to .env file
 yarn install
 yarn run dev for development use
 yarn run build for production use
