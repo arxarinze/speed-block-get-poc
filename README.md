@@ -16,8 +16,8 @@
 cp env.example .env
 add your web3 Node to .env file
 yarn install
-yarn run dev for development use
-yarn run build for production use
+yarn run dev #for development use
+yarn run build && yarn run start #for production use
 ```
 
 ***run api as stated above***
