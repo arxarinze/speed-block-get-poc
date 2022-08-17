@@ -1,6 +1,6 @@
 # Esimate Fees From Stream
 
-## ***Descretion used: Based On the requirements to connect to a stream, i have used the stream to laod the lst block by listening to newBlockHeaders ***
+## ***Descretion used: Based On the requirements to connect to a subscription, i have used the subscription to load the last block by listening to newBlockHeaders ***
 
 ### GET /api/get-fee-estimate
 ***This will solve the question 1a and also include additonal metric "block fullness of last block" in percentage***
