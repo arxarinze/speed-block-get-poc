@@ -60,7 +60,7 @@ export class Web3Service {
     this.wsClient.eth.clearSubscriptions();
   };
 
-  getBlocksAsArray=(num:number, option:number)=>{
+  private getBlocksAsArray=(num:number, option:number)=>{
     let blocks = []
     for (let index = 0; index <= option-1; index++) {
       blocks.push(num-index)
