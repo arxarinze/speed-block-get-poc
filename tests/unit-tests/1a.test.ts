@@ -10,9 +10,9 @@ describe("Testing fee estimate endpoint", () => {
         .expect("Content-Type", /json/)
         .expect(200);
       expect(res.body).toHaveProperty("averageTransactionFee");
-      expect(res.body).toHaveProperty("blockFullness");
+      expect(res.body).toHaveProperty("blockFullnessOfLastBlock");
       expect(res.body.averageTransactionFee).toBeGreaterThanOrEqual(0.0);
-      expect(res.body.blockFullness).toBeDefined()
+      expect(res.body.blockFullnessOfLastBlock).toBeDefined()
     
     } catch (err) {
       expect(err).toBe(err);
@@ -25,9 +25,9 @@ describe("Testing fee estimate endpoint", () => {
         .expect("Content-Type", /json/)
         .expect(200);
       expect(res.body).toHaveProperty("averageTransactionFee");
-      expect(res.body).toHaveProperty("blockFullness");
+      expect(res.body).toHaveProperty("blockFullnessOfLastBlock");
       expect(res.body.averageTransactionFee).toBeGreaterThanOrEqual(0.0);
-      expect(res.body.blockFullness).toBeDefined()
+      expect(res.body.blockFullnessOfLastBlock).toBeDefined()
     
     } catch (err) {
       expect(err).toBe(err);
@@ -40,9 +40,9 @@ describe("Testing fee estimate endpoint", () => {
         .expect("Content-Type", /json/)
         .expect(200);
       expect(res.body).toHaveProperty("averageTransactionFee");
-      expect(res.body).toHaveProperty("blockFullness");
+      expect(res.body).toHaveProperty("blockFullnessOfLastBlock");
       expect(res.body.averageTransactionFee).toBeGreaterThanOrEqual(0.0);
-      expect(res.body.blockFullness).toBeDefined()
+      expect(res.body.blockFullnessOfLastBlock).toBeDefined()
     
     } catch (err) {
       expect(err).toBe(err);

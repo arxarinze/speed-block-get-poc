@@ -16,7 +16,7 @@ export class Web3Service {
   private calculateAverageGasFee = (tx: any[]) => {
     try {
       return (
-        tx[0].reduce((previous: any, current: any) => {
+        tx.reduce((previous: any, current: any) => {
           return previous + Number(current.gasPrice) * current.gas;
         }, 0) /
         tx.length /
@@ -26,7 +26,7 @@ export class Web3Service {
       throw error;
     }
   };
-  private getAllTransactionsInBlock = async (blockData: any[]) => {
+  private getAllTransactionsInBlock = async (blockData: any[]) => { //batch requests to save network calls and further optimize
     try {
       const batch = new this.client.BatchRequest();
     let _this = this;
@@ -38,11 +38,10 @@ export class Web3Service {
         batch.add(
           (_this.client.eth.getBlock as any).request(da, true,(error:any, data:any) => {
             if (error) return reject(error);
-
             counter++;
-            blocks.push((data.transactions as Array<any>).flat().filter(data=>{
+            blocks.push(...(data.transactions as Array<any>).flat().filter(data=>{
               return data.input == "0x"
-            }));
+            })); // to save time spread and filter in one line was neccessary and not meant to be fancy
 
             if (counter === total) resolve();
           })
@@ -54,7 +53,7 @@ export class Web3Service {
 
     return blocks;
     } catch (error) {
-      console.log(error)
+      throw error
     }
   };
   private clearAllSubscriptions = () => {
@@ -63,17 +62,22 @@ export class Web3Service {
 
   getBlocksAsArray=(num:number, option:number)=>{
     let blocks = []
-    for (let index = 0; index <= option; index++) {
+    for (let index = 0; index <= option-1; index++) {
       blocks.push(num-index)
     }
     return blocks;
   }
 
   getLiveAverageFeeEstimate = async (res: Response, option: number) => {
+    if(option > 30){
+      res.status(400).json({
+        message:"Bad Request option surpasses limit of 30 according to the requirements"
+      })
+    }
     let block: any = {};
     try {
       block = await new Promise((resolve, reject) => {
-        this.wsClient.eth.subscribe("newBlockHeaders",{},(err:any, head:any) => {
+        this.wsClient.eth.subscribe("newBlockHeaders",{},(err:any, head:any) => { //subsrcibe to load blocks
           const { number, gasLimit, gasUsed } = head;
           resolve({
             number,
@@ -82,20 +86,20 @@ export class Web3Service {
           });
         });
       });
-      this.clearAllSubscriptions();
+      this.clearAllSubscriptions(); //end all subscriptions
       console.log(`Accumulating ${option} Blocks`);
-      let blockData = this.getBlocksAsArray(block.number, option)
-      let transactions = await this.getAllTransactionsInBlock(blockData);
+      let blockData = option == 0 ? [block.number]:this.getBlocksAsArray(block.number, option) //loads all blocks from last blocks passed in options
+      let transactions = await this.getAllTransactionsInBlock(blockData);// gets all transactions in the blocks that are native
       return res.status(200).json({
         averageTransactionFee: this.calculateAverageGasFee(transactions!),
-        blockFullness:
+        blockFullnessOfLastBlock:
           Math.abs(
             ((block.gasLimit - block.gasUsed) / block.gasLimit) * 100 - 100
           ) + "%",
       });
-    } catch (error) {
+    } catch (error:any) {
       return res.status(500).json({
-        error,
+        error:error.message,
       });
     }
   };
