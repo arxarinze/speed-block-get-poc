@@ -1,6 +1,6 @@
 # Esimate Fees From Stream
 
-## ***Descretion used: Based On the requirements to connect to a subscription, i have used the subscription to load the last block by listening to newBlockHeaders ***
+## ***proof of concept to show block retrieval speed at 5 blocks and at 200 blocks with similar timing***
 
 ### GET /api/get-fee-estimate
 ***This will solve the question 1a and also include additonal metric "block fullness of last block" in percentage***
